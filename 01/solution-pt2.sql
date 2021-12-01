@@ -8,7 +8,7 @@ WITH indexed as (
     SELECT ROW_NUMBER() OVER(ORDER BY 1) as row_num, CAST(depth as int)
     FROM input
 ), windows as (
-    SELECT m1.row_num, m1.depth, m2.depth, m3.depth, m1.depth + m2.depth + m3.depth as window_total
+    SELECT m1.row_num, m1.depth + m2.depth + m3.depth as window_total
     FROM indexed m1
              INNER JOIN indexed m2 ON m2.row_num = m1.row_num + 1
              INNER JOIN indexed m3 ON m3.row_num = m1.row_num + 2
