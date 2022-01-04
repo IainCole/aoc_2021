@@ -4,7 +4,7 @@ CREATE TEMP TABLE input(line text);
 
 COPY input FROM '/Users/coleiain/aoc_2021/04/input';
 
-WITH recursive numbered_lines as (
+WITH numbered_lines as (
     SELECT ROW_NUMBER() over (ORDER BY 1) as row_num, regexp_replace(REPLACE(line, '  ', ' '), '^ ', '') as line
     FROM input
 ), numbers as (
